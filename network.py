@@ -90,21 +90,21 @@ class SmallCNN(nn.Module):
 
 
 if __name__ == "__main__":
+    # nerual network visualization
+
     '''
     mynet = Tiny1DCNN(2)
-    vis_graph = h.build_graph(mynet, torch.zeros([64, 9, 128]))   # 获取绘制图像的对象
-    vis_graph.theme = h.graph.THEMES["blue"].copy()     # 指定主题颜色
-    vis_graph.save("networks/demo1.png")   # 保存图像的路径
+    vis_graph = h.build_graph(mynet, torch.zeros([64, 9, 128]))
+    vis_graph.theme = h.graph.THEMES["blue"].copy()
+    vis_graph.save("networks/demo1.png")
     '''
     
     mynet = Tiny1DCNN(2)
     x = torch.randn(64, 9, 128).requires_grad_(True)
-    y = mynet(x)    # 获取网络的预测值
+    y = mynet(x)
     MyConvNetVis = make_dot(y, params=dict(list(mynet.named_parameters()) + [('x', x)]))
     MyConvNetVis.format = "png"
-    # 指定文件生成的文件夹
     MyConvNetVis.directory = "networks"
-    # 生成文件
     MyConvNetVis.view()
         
         
